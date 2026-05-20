@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Voting</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'survey/styles.css' %}">
+</head>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("graph-form").addEventListener("submit", function(event) {
+        let allFilled = true;
+        // Check for 10 graphs; change 10 if you have a different number
+        for (let i = 1; i <= 10; i++) {
+            const impact = document.getElementById(`impact_${i}`).value;
+            const probability = document.getElementById(`probability_${i}`).value;
+            if (!impact || !probability) {
+                allFilled = false;
+                break;
+            }
+        }
+        if (!allFilled) {
+            event.preventDefault();
+            alert("All the graphs should be filled up to submit.");
+        }
+    });
+});
+</script>
+<body>
+    <div class="graph-page">
+        <!-- Title Section -->
+        <div class="title-container">
+            <h1>Graph Voting</h1>
+            <p class="explanation-text">
+                Click on the graph to vote. A red cross will appear at your selected point. When you're done, click Submit. Thank you for your participation!
+            </p>
+        </div>
+
+        <!-- Graph Section -->
+        <div class="graph-container">
+            <form method="post" id="graph-form">
+                {% csrf_token %}
+                {% for i, title in graph_data %}
+                    <div class="graph-wrapper">
+                        <h2 class="graph-title">{{ title }}</h2>
+                        <canvas id="graph_{{ i }}" width="900" height="700"></canvas>
+                        <input type="hidden" name="impact_{{ i }}" id="impact_{{ i }}">
+                        <input type="hidden" name="probability_{{ i }}" id="probability_{{ i }}">
+                    </div>
+                {% endfor %}
+                <!-- Submit Button Section -->
+                    <div class="button-container">
+                        <button type="submit" class="btn-submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+            
+
+    <script src="{% static 'survey/scripts.js' %}"></script>
+</body>
+</html>

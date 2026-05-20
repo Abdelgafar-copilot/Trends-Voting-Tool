@@ -1,0 +1,203 @@
+/*-----------------------IN PROGRESS------------------------------------*/
+/* Adapt to every device */
+.reset-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+    padding: 20px; /* Add padding for smaller screens */
+    box-sizing: border-box; /* Include padding in width/height calculations */
+}
+/* For screens smaller than 768px (tablets and phones) */
+@media (max-width: 768px) {
+    .reset-container {
+        padding: 10px; /* Reduce padding */
+    }
+
+    h1 {
+        font-size: 24px; /* Reduce font size for smaller screens */
+    }
+
+    .btn-reset {
+        padding: 10px 20px; /* Adjust button size */
+        font-size: 14px; /* Reduce button font size */
+    }
+}
+
+/* For screens smaller than 480px (phones) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px; /* Further reduce font size */
+    }
+
+    .btn-reset {
+        padding: 8px 16px; /* Further adjust button size */
+        font-size: 12px; /* Further reduce button font size */
+    }
+}
+
+/*-----------------------------------------------------------------------------------*/
+
+/*REGISTER PAGE*/
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: block; /* Allow content to flow naturally */
+}
+
+/* Container for the form and title */
+.container {
+    /* Keep this class generic for other pages */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Register Page Container */
+.register-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    height: 100vh; /* Make the container span the full viewport height */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding around the content */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+/* Form container styling */
+form {
+    background-color: #ffffff;
+    padding: 45px;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px;
+    margin-left: 80px; /* Add left margin to move the form to the right */
+}
+/* Form heading */
+h1 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 20px; /*espacement entre le titre et le formulaire*/
+    margin-left: 80px;
+    font-size: 40px; /* taille de police pour le titre */
+}
+
+/* Form fields */
+form p {
+    margin-bottom: 20px;
+}
+
+form label {
+    font-weight: bold;
+    color: #555555;
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Submit button */
+form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+/* Backup and Reset Page */
+/* Reset Page */
+.reset-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.btn-reset {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-reset:hover {
+    background-color: #c9302c;
+}
+/*---------------------------------------------------------------------------------------------*/
+/*GRAPH PAGE*/
+/* Title Section */
+.title-container {
+    text-align: center; /* Keep the title centered */
+    margin-bottom: 20px;
+}
+
+/* Explanation Text */
+.explanation-text {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: right; /* Align the text to the right */
+    margin-right: 30%; /* Adjust this value to align with the middle of the title */
+}
+
+/* Graph Section */
+.graph-container {
+    display: flex;
+    justify-content: flex-end; /* Align the graphs to the right */
+    margin-bottom: 20px;
+    margin-right: 35%; /* Adjust this value to align with the middle of the title */
+}
+
+.button-container {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-end; /* Align the button to the right */
+    margin-top: 20px; /* Add spacing above the button */
+    padding-right: 100px; /* Optional: Add padding to move it further from the edge */
+    margin-right: -15%;
+}
+
+
+.btn-submit {
+    background-color: #0021da;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}

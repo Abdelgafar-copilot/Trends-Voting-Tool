@@ -1,0 +1,211 @@
+/*-----------------------IN PROGRESS------------------------------------*/
+canvas {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    max-width: 100%;
+    height: auto;
+}
+
+/*-----------------------------------------------------------------------------------*/
+
+/*REGISTER PAGE*/
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: block; /* Allow content to flow naturally */
+}
+
+/* Container for the form and title */
+.container {
+    /* Keep this class generic for other pages */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Register Page Container */
+.register-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    height: 100vh; /* Make the container span the full viewport height */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding around the content */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+/* Form container styling */
+form {
+    background-color: #ffffff;
+    padding: 45px;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px;
+    margin-left: 80px; /* Add left margin to move the form to the right */
+}
+/* Form heading */
+h1 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 20px; /*espacement entre le titre et le formulaire*/
+    margin-left: 80px;
+    font-size: 40px; /* taille de police pour le titre */
+}
+
+/* Form fields */
+form p {
+    margin-bottom: 20px;
+}
+
+form label {
+    font-weight: bold;
+    color: #555555;
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Submit button */
+form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+/* Backup and Reset Page */
+/* Reset Page */
+.reset-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.btn-reset {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-reset:hover {
+    background-color: #c9302c;
+}
+/*---------------------------------------------------------------------------------------------*/
+/*GRAPH PAGE*/
+/* Title Section */
+.title-container {
+    text-align: center; /* Keep the title centered */
+    margin-bottom: 20px;
+}
+
+/* Explanation Text */
+.explanation-text {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: right; /* Align the text to the right */
+    margin-right: 30%; /* Adjust this value to align with the middle of the title */
+}
+
+.graph-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px; /* Increase this value for more space around the title */
+    padding-bottom: 0;   /* Optional: ensure no extra padding */
+}
+.graph-title {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+/* Graph Section */
+.graph-container {
+    display: flex;
+    flex-direction: column; /* Stack graphs vertically */
+    align-items: center;    /* Center graphs horizontally */
+    margin-bottom: 20px;
+    margin-right: 0;        /* Remove right margin */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Center the button */
+    margin-top: 20px;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+
+.btn-submit {
+    background-color: #0021da;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 800px) {
+    .container,
+    .register-container,
+    .graph-container {
+        max-width: 100vw;
+        padding: 10px;
+        margin: 0;
+    }
+    .explanation-text {
+        text-align: center;
+        margin-right: 0;
+    }
+    form {
+        margin-left: 0;
+        padding: 10px;
+        max-width: 100vw;
+    }
+    h1 {
+        margin-left: 0;
+        font-size: 28px;
+    }
+}

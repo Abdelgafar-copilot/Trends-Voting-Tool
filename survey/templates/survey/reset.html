@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'survey/styles.css' %}">
+</head>
+<body>
+    <div class="reset-container">
+        <h1>Reset</h1>
+        <p>Click the button below to perform the reset of all survey data.</p>
+        <button id="reset-button" class="btn-reset">Reset</button>
+        <p id="status-message" style="margin-top: 10px; color: green; display: none;">Reset completed successfully.</p>
+    </div>
+
+    <script>
+        document.getElementById("reset-button").addEventListener("click", function () {
+            if (confirm("Are you sure you want to reset?")) {
+                fetch("{% url 'reset_data' %}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}",
+                    },
+                })
+                .then(response => response.text()) // Get the response text
+                .then(message => {
+                    alert(message); // Display the message from the server
+                    if (message === "Reset completed successfully.") {
+                        document.getElementById("status-message").style.display = "block";
+                        document.getElementById("status-message").innerText = message;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred while performing the reset.");
+                });
+            }
+        });
+    </script>
+</body>
+</html>

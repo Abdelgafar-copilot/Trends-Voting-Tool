@@ -37,16 +37,16 @@ def survey_graph(request, user_id):
                 )
         return redirect('thank_you')
     graph_titles = [
-        "1. Navigating Global Uncertainty: Geoplotitical Risks and Chances",
-        "2. Building Digital Trust", 
-        "3. Circular Economy  and Sustainable Supply Chain", 
-        "4. Semantic Web",
-        "5. The Power of Digital Twins",
-        "6. Leveraging AI",
-        "7. Safeguarding Ethical Standards and Regulations",
-        "8. Upskilling for the Future: cognitive skills for the hybrid working",
-        "9. Advanced Connectivity",
-        "10. Autonomous Logistics"
+        "1. Upskilling",
+        "2. AI as New Co-Worker",
+        "3. Agentic AI​",
+        "4. Supply Chain Orchestration",
+        "5. Rising Pressure on Cost & Profitability", 
+        "6. Cybersecurity",
+        "7. Supply Chain Resilience", 
+        "8. Anti-fragile Supply Chains​",
+        "9. Decision-centric planning",
+        "10. Customer-Centric Supply Chains"
     ]
     graph_data = zip(range(1, 11), graph_titles)
     return render(request, 'survey/graph.html', {

@@ -13,46 +13,60 @@ def register_user(request):
         form = UserInfoForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('survey_graph', user_id=user.id)
+            return redirect('survey_graph', user_id=user.id)                # Go to survey step 1
     else:
         form = UserInfoForm()
     return render(request, 'survey/register.html', {'form': form})
 
-def survey_graph(request, user_id):
+
+def survey_graph(request, user_id, step=1):
     try:
         user = UserInfo.objects.get(id=user_id)
     except UserInfo.DoesNotExist:
         raise Http404("User does not exist")
     
-    if request.method == 'POST':
-        for i in range(1, 11):  # 10 graphs
-            impact = request.POST.get(f'impact_{i}')
-            probability = request.POST.get(f'probability_{i}')
-            if impact and probability:  # Ensure values are not empty
-                UserAnswer.objects.create(
-                    user=user,
-                    graph_number=i,
-                    impact_value=float(impact),
-                    probability_value=float(probability)
-                )
-        return redirect('thank_you')
     graph_titles = [
-        "1. Upskilling",
-        "2. AI as New Co-Worker",
-        "3. Agentic AI​",
-        "4. Supply Chain Orchestration",
-        "5. Rising Pressure on Cost & Profitability", 
-        "6. Cybersecurity",
-        "7. Supply Chain Resilience", 
-        "8. Anti-fragile Supply Chains​",
-        "9. Decision-centric planning",
+        "1. Upskilling", "2. AI as New Co-Worker", "3. Agentic AI",
+        "4. Supply Chain Orchestration", "5. Rising Pressure on Cost & Profitability",
+        "6. Cybersecurity", "7. Supply Chain Resilience", 
+        "8. Anti-fragile Supply Chains", "9. Decision-centric planning",
         "10. Customer-Centric Supply Chains"
     ]
-    graph_data = zip(range(1, 11), graph_titles)
-    return render(request, 'survey/graph.html', {
-        'user_id': user_id,
-        'graph_data': graph_data,
-    })
+    if step < 1 or step > 10:
+        step = 1
+    current_title = graph_titles[step-1]
+    if request.method == 'POST':
+        impact = request.POST.get('impact')
+        probability = request.POST.get('probability')
+        if impact and probability:
+            UserAnswer.objects.update_or_create(
+                user=user,
+                graph_number=step,
+                defaults={
+                    'impact_value': float(impact),
+                    'probability_value': float(probability)
+                }
+            )
+        if step < 10:
+            return redirect('survey_graph_step', user_id=user_id, step=step + 1)  # Pass user_id
+        else:
+            return redirect('thank_you')
+    # GET request
+    try:
+        existing = UserAnswer.objects.get(user=user, graph_number=step)
+        impact = existing.impact_value
+        probability = existing.probability_value
+    except UserAnswer.DoesNotExist:
+        impact = None
+        probability = None
+    context = {
+        'current_step': step,
+        'current_title': current_title,
+        'impact': impact,
+        'probability': probability,
+        'user_id': user_id,  # Add this for navigation
+    }
+    return render(request, 'survey/single_graph.html', context)
 
 def thank_you(request):
     return render(request, 'survey/thank_you.html')

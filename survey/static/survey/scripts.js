@@ -172,33 +172,72 @@ function handleCanvasClick(event, canvas, ctx, i) {
     }
 }
 
+
+// Initialize SINGLE graph
+document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById('graph_1');
+    if (!canvas) return;   // ← This prevents the error
+
+    const ctx = canvas.getContext("2d");
+    canvas.width = graphConfig.width;
+    canvas.height = graphConfig.height;
+
+    drawGraph(ctx);
+
+    // Restore red cross if values exist
+    const impactInput = document.getElementById('impact_1');
+    const probInput = document.getElementById('probability_1');
+
+    if (impactInput && probInput && impactInput.value && probInput.value) {
+        redrawCross(ctx, parseFloat(impactInput.value), parseFloat(probInput.value));
+    }
+
+    canvas.addEventListener("click", (event) => {
+        handleCanvasClick(event, canvas, ctx, 1);
+    });
+});
+
+function redrawCross(ctx, impact, probability) {
+    const x = graphConfig.graphX + (impact / 4) * graphConfig.graphWidth;
+    const y = graphConfig.graphY + graphConfig.graphHeight * (1 - probability / 4);
+    
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(x - 8, y - 8);
+    ctx.lineTo(x + 8, y + 8);
+    ctx.moveTo(x - 8, y + 8);
+    ctx.lineTo(x + 8, y - 8);
+    ctx.stroke();
+}
+
 // Initialize graphs
-document.addEventListener("DOMContentLoaded", () => {
-    for (let i = 1; i <= 10; i++) {
-        const canvas = document.getElementById(`graph_${i}`);
-        const ctx = canvas.getContext("2d");
+// document.addEventListener("DOMContentLoaded", () => {
+//     for (let i = 1; i <= 10; i++) {
+//         const canvas = document.getElementById(`graph_${i}`);
+//         const ctx = canvas.getContext("2d");
 
-        // Set canvas dimensions
-        canvas.width = graphConfig.width;
-        canvas.height = graphConfig.height;
+//         // Set canvas dimensions
+//         canvas.width = graphConfig.width;
+//         canvas.height = graphConfig.height;
 
-        // Draw the initial graph
-        drawGraph(ctx);
+//         // Draw the initial graph
+//         drawGraph(ctx);
 
-        // Add click event listener
-        canvas.addEventListener("click", (event) => handleCanvasClick(event, canvas, ctx, i));
-    }
-});
+//         // Add click event listener
+//         canvas.addEventListener("click", (event) => handleCanvasClick(event, canvas, ctx, i));
+//     }
+// });
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Select the button container
-    const buttonContainer = document.querySelector(".button-container");
+// document.addEventListener("DOMContentLoaded", () => {
+//     // Select the button container
+//     const buttonContainer = document.querySelector(".button-container");
 
-    // Apply styles to move the button to the left
-    if (buttonContainer) {
-        buttonContainer.style.display = "flex";
-        buttonContainer.style.justifyContent = "flex-start"; // Align the button to the left
-        buttonContainer.style.marginTop = "20px"; // Add spacing above the button
-    }
-});
+//     // Apply styles to move the button to the left
+//     if (buttonContainer) {
+//         buttonContainer.style.display = "flex";
+//         buttonContainer.style.justifyContent = "flex-start"; // Align the button to the left
+//         buttonContainer.style.marginTop = "20px"; // Add spacing above the button
+//     }
+// });
 

@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Voting - Step {{ current_step }}</title>
+    <link rel="stylesheet" href="{% static 'survey/styles.css' %}">
+</head>
+<body>
+    <div class="graph-page">
+        <div class="title-container">
+            <h1>Graph Voting</h1>
+            <p class="explanation-text">
+                Click on the graph to place your vote. A red cross will appear.<br>
+                Use Previous / Next to navigate between topics.
+            </p>
+            <p><strong>Step {{ current_step }} of 10</strong> — {{ current_title }}</p>
+        </div>
+
+        <div class="graph-container">
+            <form method="post" id="graph-form">
+                {% csrf_token %}
+                
+                <div class="graph-wrapper">
+                    <h2 class="graph-title">{{ current_title }}</h2>
+                    <canvas id="graph_1" width="1000" height="600"></canvas>
+                    
+                    <input type="hidden" name="impact" id="impact_1" value="{{ impact|default:'' }}">
+                    <input type="hidden" name="probability" id="probability_1" value="{{ probability|default:'' }}">
+                </div>
+
+                <div class="button-container" style="display:flex; gap:15px; margin-top:25px; justify-content:center;">
+                    {% if current_step > 1 %}
+                        <a href="{% url 'survey_graph_step' user_id current_step|add:'-1' %}" 
+                        class="btn btn-secondary">← Previous</a>
+                    {% endif %}
+
+                    {% if current_step < 10 %}
+                        <button type="submit" class="btn-submit">Next →</button>
+                    {% else %}
+                        <button type="submit" class="btn-submit">Submit All Votes</button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'survey/scripts.js' %}"></script>
+</body>
+</html>

@@ -201,3 +201,17 @@ form button:hover {
 .btn-submit:hover {
     background-color: #0056b3;
 }
+
+.trend-image {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+}
+
+.trend-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px; /* Adjust as needed */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

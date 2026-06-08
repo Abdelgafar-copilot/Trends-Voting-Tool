@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graph Voting - Step {{ current_step }}</title>
+    <title>Graph Voting - Trend {{ current_step }}</title>
     <link rel="stylesheet" href="{% static 'survey/styles.css' %}">
 </head>
 <body>
@@ -15,7 +15,7 @@
                 Click on the graph to place your vote. A red cross will appear.<br>
                 Use Previous / Next to navigate between topics.
             </p>
-            <p><strong>Step {{ current_step }} of 10</strong> — {{ current_title }}</p>
+            <p><strong>Trend {{ current_step }} of 10</strong></p>
         </div>
 
         <div class="graph-container">
@@ -24,6 +24,15 @@
                 
                 <div class="graph-wrapper">
                     <h2 class="graph-title">{{ current_title }}</h2>
+                    
+                    {% if current_image %}
+                    <div class="trend-image">
+                        <img src="{% static 'survey/images/' %}{{ current_image }}" 
+                            alt="{{ current_title }}" 
+                            class="trend-img">
+                    </div>
+                    {% endif %}
+                    
                     <canvas id="graph_1" width="1000" height="600"></canvas>
                     
                     <input type="hidden" name="impact" id="impact_1" value="{{ impact|default:'' }}">

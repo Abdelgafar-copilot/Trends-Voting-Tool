@@ -7,18 +7,16 @@ import pandas as pd
 import os
 from django.contrib import messages
 
-   
 def register_user(request):
     if request.method == 'POST':
         form = UserInfoForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('survey_graph', user_id=user.id)                # Go to survey step 1
+            return redirect('survey_graph', user_id=user.id)
     else:
         form = UserInfoForm()
     return render(request, 'survey/register.html', {'form': form})
-
-
+   
 def survey_graph(request, user_id, step=1):
     try:
         user = UserInfo.objects.get(id=user_id)
@@ -26,15 +24,38 @@ def survey_graph(request, user_id, step=1):
         raise Http404("User does not exist")
     
     graph_titles = [
-        "1. Upskilling", "2. AI as New Co-Worker", "3. Agentic AI",
-        "4. Supply Chain Orchestration", "5. Rising Pressure on Cost & Profitability",
-        "6. Cybersecurity", "7. Supply Chain Resilience", 
-        "8. Anti-fragile Supply Chains", "9. Decision-centric planning",
+        "1. Upskilling", 
+        "2. AI as New Co-Worker", 
+        "3. Agentic AI",
+        "4. Supply Chain Orchestration", 
+        "5. Rising Pressure on Cost & Profitability",
+        "6. Cybersecurity", 
+        "7. Supply Chain Resilience", 
+        "8. Anti-fragile Supply Chains", 
+        "9. Decision-centric planning",
         "10. Customer-Centric Supply Chains"
     ]
+    
+    # Add image filenames for each trend
+    graph_images = [
+        "upskilling.png",
+        "ai_coworker.png",
+        "agentic_ai.png",
+        "supply_chain_orchestration.png",
+        "cost_profitability.png",
+        "cybersecurity.png",
+        "resilience.png",
+        "anti_fragile.png",
+        "decision_centric.png",
+        "customer_centric.png"
+    ]
+    
     if step < 1 or step > 10:
         step = 1
     current_title = graph_titles[step-1]
+    current_image = graph_images[step-1]
+
+
     if request.method == 'POST':
         impact = request.POST.get('impact')
         probability = request.POST.get('probability')
@@ -59,12 +80,14 @@ def survey_graph(request, user_id, step=1):
     except UserAnswer.DoesNotExist:
         impact = None
         probability = None
+
     context = {
         'current_step': step,
         'current_title': current_title,
+        'current_image': current_image,  
         'impact': impact,
         'probability': probability,
-        'user_id': user_id,  # Add this for navigation
+        'user_id': user_id,
     }
     return render(request, 'survey/single_graph.html', context)
 

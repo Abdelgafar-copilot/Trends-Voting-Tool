@@ -1,11 +1,41 @@
 /*-----------------------IN PROGRESS------------------------------------*/
-canvas {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-    max-width: 100%;
-    height: auto;
+/* Adapt to every device */
+.reset-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+    padding: 20px; /* Add padding for smaller screens */
+    box-sizing: border-box; /* Include padding in width/height calculations */
+}
+/* For screens smaller than 768px (tablets and phones) */
+@media (max-width: 768px) {
+    .reset-container {
+        padding: 10px; /* Reduce padding */
+    }
+
+    h1 {
+        font-size: 24px; /* Reduce font size for smaller screens */
+    }
+
+    .btn-reset {
+        padding: 10px 20px; /* Adjust button size */
+        font-size: 14px; /* Reduce button font size */
+    }
+}
+
+/* For screens smaller than 480px (phones) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px; /* Further reduce font size */
+    }
+
+    .btn-reset {
+        padding: 8px 16px; /* Further adjust button size */
+        font-size: 12px; /* Further reduce button font size */
+    }
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -141,35 +171,20 @@ form button:hover {
     margin-right: 30%; /* Adjust this value to align with the middle of the title */
 }
 
-.graph-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px; /* Increase this value for more space around the title */
-    padding-bottom: 0;   /* Optional: ensure no extra padding */
-}
-.graph-title {
-    display: block;
-    text-align: center;
-    margin-bottom: 10px;
-    margin-top: 0;
-}
-
 /* Graph Section */
 .graph-container {
     display: flex;
-    flex-direction: column; /* Stack graphs vertically */
-    align-items: center;    /* Center graphs horizontally */
+    justify-content: flex-end; /* Align the graphs to the right */
     margin-bottom: 20px;
-    margin-right: 0;        /* Remove right margin */
+    margin-right: 35%; /* Adjust this value to align with the middle of the title */
 }
 
 .button-container {
-    display: flex;
-    justify-content: center; /* Center the button */
-    margin-top: 20px;
-    padding-right: 0;
-    margin-right: 0;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-end; /* Align the button to the right */
+    margin-top: 20px; /* Add spacing above the button */
+    padding-right: 100px; /* Optional: Add padding to move it further from the edge */
+    margin-right: -15%;
 }
 
 
@@ -187,25 +202,16 @@ form button:hover {
     background-color: #0056b3;
 }
 
-@media (max-width: 800px) {
-    .container,
-    .register-container,
-    .graph-container {
-        max-width: 100vw;
-        padding: 10px;
-        margin: 0;
-    }
-    .explanation-text {
-        text-align: center;
-        margin-right: 0;
-    }
-    form {
-        margin-left: 0;
-        padding: 10px;
-        max-width: 100vw;
-    }
-    h1 {
-        margin-left: 0;
-        font-size: 28px;
-    }
+.trend-image {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+}
+
+.trend-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px; /* Adjust as needed */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }

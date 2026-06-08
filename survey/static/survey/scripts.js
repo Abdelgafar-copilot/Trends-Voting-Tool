@@ -12,18 +12,56 @@ const graphConfig = {
 function drawGraph(ctx) {
     const { graphWidth, graphHeight, graphX, graphY } = graphConfig;
 
-    // Clear the canvas
+    // Efface le canvas
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    // Draw axes
+    // Dessine les axes
     drawAxes(ctx, graphX, graphY, graphWidth, graphHeight);
 
-    // Draw grid
-    drawGrid(ctx, graphX, graphY, graphWidth, graphHeight, 3, 3);
+    // Dessine la ligne verticale (séparation)
+    ctx.save();
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    const x5 = graphX + graphWidth / 2;
+    ctx.beginPath();
+    ctx.moveTo(x5, graphY);
+    ctx.lineTo(x5, graphY + graphHeight);
+    ctx.stroke();
 
-    // Add graduations
+    // Dessine la ligne horizontale (séparation)
+    const y5 = graphY + graphHeight / 2;
+    ctx.beginPath();
+    ctx.moveTo(graphX, y5);
+    ctx.lineTo(graphX + graphWidth, y5);
+    ctx.stroke();
+    ctx.restore();
+
+    // Titres des sections
+    const quadrantTitles = [
+        ["High impact Low probability", "High impact High probability"],
+        ["Low impact Low probability", "Low impact High probability"]
+    ];
+    const halfWidth = graphWidth / 2;
+    const halfHeight = graphHeight / 2;
+
+    ctx.save();
+    ctx.font = "bold 14px Arial";
+    ctx.fillStyle = "#333";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    for (let row = 0; row < 2; row++) {
+        for (let col = 0; col < 2; col++) {
+            const titleX = graphX + col * halfWidth + halfWidth / 2;
+            const titleY = graphY + row * halfHeight + halfHeight / 2;
+            ctx.fillText(quadrantTitles[row][col], titleX, titleY);
+        }
+    }
+    ctx.restore();
+
+    // Add graduations (toujours 0-10)
     addXGraduations(ctx, graphX, graphY, graphWidth, graphHeight);
-    addYGraduations(ctx, graphX, graphY, graphHeight, 4);
+    addYGraduations(ctx, graphX, graphY, graphHeight, 10);
+
     // Add axis labels
     addLabels(ctx, graphX, graphY, graphWidth, graphHeight);
 }
@@ -42,7 +80,7 @@ function drawAxes(ctx, graphX, graphY, graphWidth, graphHeight) {
 
 // Function to add axes graduations
 function addXGraduations(ctx, graphX, graphY, graphWidth, graphHeight) {
-    const cols = 4; // Number of graduations
+    const cols = 10; // Number of graduations (0 to 10)
     const cellWidth = graphWidth / cols;
 
     ctx.font = "14px Arial";
@@ -52,43 +90,47 @@ function addXGraduations(ctx, graphX, graphY, graphWidth, graphHeight) {
     // Add X-axis graduations
     for (let i = 0; i <= cols; i++) {
         const x = graphX + i * cellWidth;
-        const value = i.toFixed(1); // Graduation value
-        ctx.fillText(value, x, graphY + graphHeight + 20); // Position below X-axis
+        const value = i; // Graduation value as integer
+        ctx.fillText(value, x, graphY + graphHeight + 20);
     }
-
 }
 // Function to add Y-axis graduations
 function addYGraduations(ctx, graphX, graphY, graphHeight, rows) {
-    const cellHeight = graphHeight / rows; // Height of each graduation step
+    const cellHeight = graphHeight / rows;
 
     ctx.font = "14px Arial";
-    ctx.fillStyle = "#000000";
-    ctx.textAlign = "right"; // Align text to the right of the Y-axis
-    ctx.textBaseline = "middle"; // Center text vertically
+    ctx.fillStyle = "black"
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
 
     // Add Y-axis graduations
     for (let i = 0; i <= rows; i++) {
-        const y = graphY + graphHeight - i * cellHeight; // Position of the graduation
-        const value = i.toFixed(1); // Graduation value
-        ctx.fillText(value, graphX - 10, y); // Position text slightly left of the Y-axis
+        const y = graphY + graphHeight - i * cellHeight;
+        const value = i; // Graduation value as integer
+        ctx.fillText(value, graphX - 10, y);
     }
 }
 
 
 // Function to draw grid
-function drawGrid(ctx, graphX, graphY, graphWidth, graphHeight, rows, cols) {
+function drawGrid(ctx, graphX, graphY, graphWidth, graphHeight, rows, cols, title = null) {
     const cellWidth = graphWidth / cols;
     const cellHeight = graphHeight / rows;
 
-    ctx.strokeStyle = "#cccccc";
-    ctx.lineWidth = 1;
-
-    // Titles for each cell
-    const cellTitles = [
-        ["High Impact, Low Probability", "High Impact, Medium Probability", "High Impact, High Probability"],
-        ["Medium Impact, Low Probability", "Medium Impact, Medium Probability", "Medium Impact, High Probability"],
-        ["Low Impact, Low Probability", "Low Impact, Medium Probability", "Low Impact, High Probability"]
-    ];
+    // Fill each cell with a color (e.g., light gray)
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+            ctx.save();
+            ctx.fillStyle = "#f0f0f0"; // Change color as needed
+            ctx.fillRect(
+                graphX + col * cellWidth,
+                graphY + row * cellHeight,
+                cellWidth,
+                cellHeight
+            );
+            ctx.restore();
+        }
+    }
 
     // Draw horizontal lines
     for (let i = 0; i <= rows; i++) {
@@ -108,21 +150,19 @@ function drawGrid(ctx, graphX, graphY, graphWidth, graphHeight, rows, cols) {
         ctx.stroke();
     }
 
-    // Add titles to each cell
-    ctx.font = "11px Arial";
-    const gradient = ctx.createLinearGradient(0, 1, 200, 0);
-    gradient.addColorStop(0, "grey");
-    gradient.addColorStop(1, "blue");
-    ctx.fillStyle = gradient;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-
-    for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-            const x = graphX + col * cellWidth + cellWidth / 2; // Center of the cell horizontally
-            const y = graphY + row * cellHeight + cellHeight / 2; // Center of the cell vertically
-            ctx.fillText(cellTitles[row][col], x, y); // Draw the title
-        }
+    // Draw the title in the center if provided
+    if (title) {
+        ctx.save();
+        ctx.font = "bold 18px Arial";
+        ctx.fillStyle = "#333";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(
+            title,
+            graphX + graphWidth / 2,
+            graphY + graphHeight / 2
+        );
+        ctx.restore();
     }
 }
 

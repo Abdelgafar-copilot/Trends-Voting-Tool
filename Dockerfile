@@ -24,8 +24,8 @@ COPY . .
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
-# Expose port 8000
-EXPOSE 8000
+# Expose port 9000
+EXPOSE 9000
 
 # Start Gunicorn server
-CMD ["gunicorn", "mysite.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "mysite.wsgi:application", "--bind", "0.0.0.0:9000"]

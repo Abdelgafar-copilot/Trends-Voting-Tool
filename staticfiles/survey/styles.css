@@ -158,25 +158,23 @@ form button:hover {
 /*GRAPH PAGE*/
 /* Title Section */
 .title-container {
-    text-align: center; /* Keep the title centered */
+    text-align: center;
     margin-bottom: 20px;
 }
 
-/* Explanation Text */
 .explanation-text {
     font-size: 16px;
     color: #555;
     margin-bottom: 20px;
-    text-align: right; /* Align the text to the right */
-    margin-right: 30%; /* Adjust this value to align with the middle of the title */
+    text-align: center; /* Change from right to center */
+    margin: 0 auto; /* Remove margin-right, add auto margins */
 }
 
-/* Graph Section */
 .graph-container {
     display: flex;
-    justify-content: flex-end; /* Align the graphs to the right */
+    justify-content: center; /* Change from flex-end to center */
     margin-bottom: 20px;
-    margin-right: 35%; /* Adjust this value to align with the middle of the title */
+    margin: 0 auto; /* Remove margin-right, add auto margins */
 }
 
 .button-container {

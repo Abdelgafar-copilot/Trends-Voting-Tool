@@ -12,7 +12,7 @@ def export_to_excel(modeladmin, request, queryset):
             user_data.append({
                 'Name': user.username,
                 'Role in Supply Chain': user.role_in_sc,
-                'Years of Working': user.years_working,
+                'Years of Experience': user.years_working,
                 'Date': user.date,
                 'Time': user.time,
                 'Graph Number': answer.graph_number,

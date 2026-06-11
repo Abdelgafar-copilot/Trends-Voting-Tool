@@ -250,34 +250,3 @@ function redrawCross(ctx, impact, probability) {
     ctx.lineTo(x + 8, y - 8);
     ctx.stroke();
 }
-
-// Initialize graphs
-// document.addEventListener("DOMContentLoaded", () => {
-//     for (let i = 1; i <= 10; i++) {
-//         const canvas = document.getElementById(`graph_${i}`);
-//         const ctx = canvas.getContext("2d");
-
-//         // Set canvas dimensions
-//         canvas.width = graphConfig.width;
-//         canvas.height = graphConfig.height;
-
-//         // Draw the initial graph
-//         drawGraph(ctx);
-
-//         // Add click event listener
-//         canvas.addEventListener("click", (event) => handleCanvasClick(event, canvas, ctx, i));
-//     }
-// });
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     // Select the button container
-//     const buttonContainer = document.querySelector(".button-container");
-
-//     // Apply styles to move the button to the left
-//     if (buttonContainer) {
-//         buttonContainer.style.display = "flex";
-//         buttonContainer.style.justifyContent = "flex-start"; // Align the button to the left
-//         buttonContainer.style.marginTop = "20px"; // Add spacing above the button
-//     }
-// });
-

@@ -99,7 +99,7 @@ def export_to_excel(request):
     data = UserAnswer.objects.select_related('user').values(
         'user__username',          # Username
         'user__role_in_sc',        # Role in SC
-        'user__years_working',     # Years working
+        'user__years_working',     # Years of Experience
         'user__date',              # Date of voting
         'user__time',              # Time of voting
         'graph_number',            # Graph number
@@ -112,7 +112,7 @@ def export_to_excel(request):
     df.rename(columns={
         'user__username': 'Name',
         'user__role_in_sc': 'Role in Supply Chain',
-        'user__years_working': 'Years of Working',
+        'user__years_working': 'Years of Experience',
         'user__date': 'Date of Voting',
         'user__time': 'Time of Voting',
         'graph_number': 'Graph Number',
@@ -138,7 +138,7 @@ def reset_data(request):
         data = UserAnswer.objects.select_related('user').values(
             'user__username',          # Username
             'user__role_in_sc',        # Role in SC
-            'user__years_working',     # Years working
+            'user__years_working',     # Years of Experience
             'user__date',              # Date of voting
             'user__time',              # Time of voting
             'graph_number',            # Graph number
@@ -152,7 +152,7 @@ def reset_data(request):
             df.rename(columns={
                 'user__username': 'Name',
                 'user__role_in_sc': 'Role in Supply Chain',
-                'user__years_working': 'Years of Working',
+                'user__years_working': 'Years of Experience',
                 'user__date': 'Date of Voting',
                 'user__time': 'Time of Voting',
                 'graph_number': 'Graph Number',

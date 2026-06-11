@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='userinfo',
-            name='years_working',
+            name='years_experience',
             field=models.FloatField(),
         ),
     ]

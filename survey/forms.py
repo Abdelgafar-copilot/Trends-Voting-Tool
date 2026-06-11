@@ -12,5 +12,5 @@ class UserInfoForm(forms.ModelForm):
         labels = {
             'username': 'Name',  # Change this text
             'role_in_sc': 'Role in Supply Chain',  # Change this text
-            'years_working': 'Years of Working',  # Change this text
+            'years_working': 'Years of Experience',  # Change this text
         }

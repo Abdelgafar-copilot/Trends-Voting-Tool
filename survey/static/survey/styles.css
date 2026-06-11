@@ -156,35 +156,89 @@ form button:hover {
 }
 /*---------------------------------------------------------------------------------------------*/
 /*GRAPH PAGE*/
+.graph-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 12px 24px 16px;
+}
+
 /* Title Section */
-.title-container {
-    text-align: center; /* Keep the title centered */
-    margin-bottom: 20px;
+.graph-page .title-container {
+    text-align: center;
+    margin-bottom: 6px;
+    flex-shrink: 0;
+}
+
+.graph-page h1 {
+    margin-left: 0;
+    font-size: 28px;
+    margin-bottom: 4px;
 }
 
 /* Explanation Text */
-.explanation-text {
-    font-size: 16px;
+.graph-page .explanation-text {
+    font-size: 14px;
     color: #555;
-    margin-bottom: 20px;
-    text-align: right; /* Align the text to the right */
-    margin-right: 30%; /* Adjust this value to align with the middle of the title */
+    margin-bottom: 4px;
+    text-align: center;
+    margin-right: 0;
 }
 
 /* Graph Section */
-.graph-container {
+.graph-page .graph-container {
+    flex: 1;
     display: flex;
-    justify-content: flex-end; /* Align the graphs to the right */
-    margin-bottom: 20px;
-    margin-right: 35%; /* Adjust this value to align with the middle of the title */
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 0;
+    margin-right: 0;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* Override generic form styles for the graph page */
+.graph-page form {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    margin-left: 0;
+    width: 100%;
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    min-height: 0;
+}
+
+.graph-page .graph-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+
+/* Scale canvas to fit available space while keeping intrinsic proportions */
+.graph-page canvas {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .button-container {
-    display: flex; /* Use flexbox for alignment */
-    justify-content: flex-end; /* Align the button to the right */
-    margin-top: 20px; /* Add spacing above the button */
-    padding-right: 100px; /* Optional: Add padding to move it further from the edge */
-    margin-right: -15%;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 8px;
+    padding-right: 0;
+    margin-right: 0;
 }
 
 

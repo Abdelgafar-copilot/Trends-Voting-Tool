@@ -22,15 +22,14 @@
                 {% csrf_token %}
                 
                 <div class="graph-wrapper">
-                    <h2 class="graph-title">{{ current_title }}</h2>
-                    
-                    {% if current_image %}
-                    <div class="trend-image">
-                        <img src="{% static 'survey/images/' %}{{ current_image }}" 
-                            alt="{{ current_title }}" 
+                    <div class="graph-heading">
+                        <h2 class="graph-title">{{ current_title }}</h2>
+                        {% if current_image %}
+                        <img src="{% static 'survey/images/' %}{{ current_image }}"
+                            alt="{{ current_title }}"
                             class="trend-img">
+                        {% endif %}
                     </div>
-                    {% endif %}
                     
                     <canvas id="graph_1" width="1000" height="600"></canvas>
                     

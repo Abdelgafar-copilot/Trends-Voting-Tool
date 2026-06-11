@@ -1,11 +1,11 @@
 // Configuration for graph dimensions
 const graphConfig = {
-    width: 1000,
-    height: 600,
-    graphWidth: 600,
-    graphHeight: 400,
-    graphX: 50,
-    graphY: 50,
+    width: 1200,
+    height: 720,
+    graphWidth: 920,
+    graphHeight: 560,
+    graphX: 140,
+    graphY: 80,
 };
 
 // Function to draw the graph
@@ -45,7 +45,7 @@ function drawGraph(ctx) {
     const halfHeight = graphHeight / 2;
 
     ctx.save();
-    ctx.font = "bold 14px Arial";
+    ctx.font = "bold 22px Arial";
     ctx.fillStyle = "#333";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -83,7 +83,7 @@ function addXGraduations(ctx, graphX, graphY, graphWidth, graphHeight) {
     const cols = 10; // Number of graduations (0 to 10)
     const cellWidth = graphWidth / cols;
 
-    ctx.font = "14px Arial";
+    ctx.font = "20px Arial";
     ctx.fillStyle = "#000000";
     ctx.textAlign = "center";
 
@@ -91,14 +91,14 @@ function addXGraduations(ctx, graphX, graphY, graphWidth, graphHeight) {
     for (let i = 0; i <= cols; i++) {
         const x = graphX + i * cellWidth;
         const value = i; // Graduation value as integer
-        ctx.fillText(value, x, graphY + graphHeight + 20);
+        ctx.fillText(value, x, graphY + graphHeight + 30);
     }
 }
 // Function to add Y-axis graduations
 function addYGraduations(ctx, graphX, graphY, graphHeight, rows) {
     const cellHeight = graphHeight / rows;
 
-    ctx.font = "14px Arial";
+    ctx.font = "20px Arial";
     ctx.fillStyle = "black"
     ctx.textAlign = "right";
     ctx.textBaseline = "middle";
@@ -107,7 +107,7 @@ function addYGraduations(ctx, graphX, graphY, graphHeight, rows) {
     for (let i = 0; i <= rows; i++) {
         const y = graphY + graphHeight - i * cellHeight;
         const value = i; // Graduation value as integer
-        ctx.fillText(value, graphX - 10, y);
+        ctx.fillText(value, graphX - 20, y);
     }
 }
 
@@ -168,16 +168,16 @@ function drawGrid(ctx, graphX, graphY, graphWidth, graphHeight, rows, cols, titl
 
 // Function to add axis labels
 function addLabels(ctx, graphX, graphY, graphWidth, graphHeight) {
-    ctx.font = "16px Arial";
+    ctx.font = "bold 24px Arial";
     ctx.fillStyle = "#000000";
 
     // X-axis label
     ctx.textAlign = "center";
-    ctx.fillText("Probability", graphX + graphWidth / 2, graphY + graphHeight + 40);
+    ctx.fillText("Probability", graphX + graphWidth / 2, graphY + graphHeight + 48);
 
     // Y-axis label
     ctx.save();
-    ctx.translate(graphX - 40, graphY + graphHeight / 2);
+    ctx.translate(graphX - 72, graphY + graphHeight / 2);
     ctx.rotate(-Math.PI / 2);
     ctx.fillText("Impact", 0, 0);
     ctx.restore();
